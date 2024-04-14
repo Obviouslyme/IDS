@@ -10,13 +10,6 @@ from sklearn.tree import DecisionTreeClassifier
 
 df = pd.read_csv('./data/CICIDS2017_sample.csv', delimiter=',')
 
-df2 = pd.read_csv('./data/Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv', delimiter=',')
-df3 = pd.read_csv('./data/Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv', delimiter=',')
-
-print("Sample : \n", df.Label.value_counts())
-print("Friday : \n", df2.Label.value_counts())
-print("Thursday : \n", df3.Label.value_counts())
-
 numeric_features = df.dtypes[df.dtypes != 'object'].index
 df[numeric_features] = df[numeric_features].apply(
     lambda x: (x - x.min()) / (x.max()-x.min()))
