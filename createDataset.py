@@ -1,14 +1,13 @@
 import csv
-    
-cicids_lines = list(csv.reader(open('./data/thursday.csv')))
-tpot_lines = list(csv.reader(open('./data/tpot.csv')))
-tpot_lines_without_label = list()
+import pandas as pd
 
-for pos, value in enumerate(tpot_lines):
-    if pos != 0:
-        tpot_lines_without_label.append(value)
+with open('./data/thursday.csv', 'r', newline='', encoding='utf-8') as cicids:
+    cicids_lines = list(csv.reader(cicids, delimiter=','))
 
-lines = cicids_lines+tpot_lines_without_label
+with open('./data/tpot.csv', 'r', newline='', encoding='utf-8') as tpot:
+    tpot_lines = list(csv.reader(tpot, delimiter=','))
+
+lines = cicids_lines+tpot_lines[1:len(tpot_lines)]
 
 for pos, value in enumerate(lines):
     if pos != 0:
@@ -18,6 +17,3 @@ for pos, value in enumerate(lines):
 with open('./data/dataset.csv', 'w', newline='', encoding='utf-8') as dataset:
     writer = csv.writer(dataset)
     writer.writerows(lines)
-
-
-
