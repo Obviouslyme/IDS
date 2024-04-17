@@ -9,6 +9,9 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report,confusion_matrix,accuracy_score,precision_recall_fscore_support
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.neural_network import MLPClassifier
 
 
 df = pd.read_csv('./data/dataset.csv', delimiter=',')
@@ -38,9 +41,16 @@ tree_model = DecisionTreeClassifier(random_state = 0)
 tree_model.fit(X_train,y_train)
 tree_predictions=tree_model.predict(X_test)
 
+# SVM
+svm_model = SVC()
+svm_model.fit(X_train, y_train)
+svm_predictions = svm_model.predict(X_test)
+
+
 models = {
     'Classificateur de Bayes': bayes_predictions,
-    'Arbre de décision': tree_predictions
+    'Arbre de décision': tree_predictions,
+    'SVM': svm_predictions
 }
 
 #Affichage de toutes les données
